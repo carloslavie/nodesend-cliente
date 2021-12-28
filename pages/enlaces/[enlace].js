@@ -2,7 +2,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import Layout from "../../components/Layout";
 import clienteAxios from "../../config/axios";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import appContext from "../../context/app/appContext";
 import Alerta from "../../components/Alerta";
 
@@ -29,26 +29,21 @@ export async function getServerSidePaths() {
 export default ({ enlace }) => {
   const { mostrarAlerta, mensaje_archivo } = useContext(appContext);
   const [tienePassword, setTienePassword] = useState(enlace.password);
-  const [loadEnlace, setLoadEnlace] = useState(enlace);
   const [password, setPassword] = useState("");
   console.log(enlace)
   const verificarPassword = async (e) => {
     e.preventDefault();
-
-    try {
-      const data = {
+    
+    const data = {
         password,
-      };
+    };
+    try {      
       const resultado = await clienteAxios.post(`/api/enlaces/${enlace.enlace}`, data);
       setTienePassword(resultado.data.password)
     } catch (error) {
       mostrarAlerta(error.response.data.msg)
     }
   };
-
-  useEffect(() => {
-    
-  }, [tienePassword])
 
   return (
     <Layout>
@@ -96,7 +91,7 @@ export default ({ enlace }) => {
           </h1>
           <div className="flex items-center justify-center mt-10">
             <a
-              href={`${process.env.backendURL}/api/archivos/${loadEnlace.archivo}`}
+              href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
               className="bg-red-500 text-center px-10 py-3 rounded uppercase font-bold text-white cursor-pointer"
             >
               Aquí
