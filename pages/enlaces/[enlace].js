@@ -46,6 +46,10 @@ export default ({ enlace }) => {
     }
   };
 
+  useEffect(() => {
+    
+  }, [tienePassword])
+
   return (
     <Layout>
       {tienePassword ? (
