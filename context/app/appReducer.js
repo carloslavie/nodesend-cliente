@@ -7,7 +7,9 @@ import {
   CREAR_ENLACE_EXITO,
   CREAR_ENLACE_ERROR,
   SUBIR_ARCHIVO,
-  LIMPIAR_STATE
+  LIMPIAR_STATE,
+  AGREGAR_PASSWORD,
+  AGREGAR_DESCARGAS
 } from "../../types";
 
 export default (state, action) => {
@@ -16,6 +18,12 @@ export default (state, action) => {
       return{
         ...state,
         mensaje_archivo: action.payload
+      }
+    case AGREGAR_PASSWORD:
+      console.log("pass", action.payload)
+      return{
+        ...state,
+        password: action.payload
       }
     case LIMPIAR_STATE:
       return{
@@ -33,6 +41,11 @@ export default (state, action) => {
       return{
         ...state,
         cargando: true
+      }
+    case AGREGAR_DESCARGAS:
+      return{
+        ...state,
+        descargas: action.payload
       }
     case LIMPIAR_ALERTA:
       return{

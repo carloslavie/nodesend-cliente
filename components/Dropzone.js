@@ -2,9 +2,12 @@
 import React, { useCallback, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import appContext from "../context/app/appContext";
+import authContext from "../context/auth/authContext";
+import Formulario from "./Formulario";
 
 const Dropzone = () => {
   const { mostrarAlerta, subirArchivo, cargando, crearEnlace } = useContext(appContext);
+  const { autenticado, usuario } = useContext(authContext);
 
   const onDropRejected = () => {
     mostrarAlerta(
@@ -33,13 +36,13 @@ const Dropzone = () => {
     </li>
   ));
 
-  
   return (
     <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0 flex flex-col items-center justify-center border-dashed border-gray-400 border-2 bg-gray-100 px-4">
       {acceptedFiles.length > 0 ? (
         <div className="mt-10 w-full">
           <h4 className="text-2xl font-bold text-center mb-4"></h4>
           <ul>{archivos}</ul>
+          { autenticado ? <Formulario/> : null }
           {cargando ? (
             <p className="my-10 text-center text-gray-600">Subiendo archivo...</p>
           ) : (
