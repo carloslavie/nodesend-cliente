@@ -20,7 +20,6 @@ export default (state, action) => {
         mensaje_archivo: action.payload
       }
     case AGREGAR_PASSWORD:
-      console.log("pass", action.payload)
       return{
         ...state,
         password: action.payload

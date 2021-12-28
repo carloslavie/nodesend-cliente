@@ -8,9 +8,7 @@ import Alerta from "../../components/Alerta";
 
 export async function getServerSideProps({ params }) {
   const { enlace } = params;
-  console.log(enlace);
   const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
-  // console.log(resultado)
   return {
     props: {
       enlace: resultado.data,
@@ -19,7 +17,6 @@ export async function getServerSideProps({ params }) {
 }
 export async function getServerSidePaths() {
   const enlaces = await clienteAxios.get("/api/enlaces");
-  console.log(enlaces.data);
   return {
     paths: enlaces.data.enlaces.map((enlace) => ({
       params: { enlace: enlace.url },
@@ -33,7 +30,6 @@ export default ({ enlace }) => {
   const [tienePassword, setTienePassword] = useState(enlace.password);
   const [password, setPassword] = useState("");
 
-  console.log(enlace);
   const verificarPassword = async (e) => {
     e.preventDefault();
 
