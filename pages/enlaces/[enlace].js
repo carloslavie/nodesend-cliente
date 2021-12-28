@@ -29,6 +29,7 @@ export async function getServerSidePaths() {
 export default ({ enlace }) => {
   const { mostrarAlerta, mensaje_archivo } = useContext(appContext);
   const [tienePassword, setTienePassword] = useState(enlace.password);
+  const [loadEnlace, setLoadEnlace] = useState(enlace);
   const [password, setPassword] = useState("");
   console.log(enlace)
   const verificarPassword = async (e) => {
@@ -91,7 +92,7 @@ export default ({ enlace }) => {
           </h1>
           <div className="flex items-center justify-center mt-10">
             <a
-              href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
+              href={`${process.env.backendURL}/api/archivos/${loadEnlace.archivo}`}
               className="bg-red-500 text-center px-10 py-3 rounded uppercase font-bold text-white cursor-pointer"
             >
               Aquí
