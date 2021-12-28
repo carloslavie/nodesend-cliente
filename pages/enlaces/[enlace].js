@@ -30,7 +30,7 @@ export default ({ enlace }) => {
   const { mostrarAlerta, mensaje_archivo } = useContext(appContext);
   const [tienePassword, setTienePassword] = useState(enlace.password);
   const [password, setPassword] = useState("");
-
+  console.log(enlace)
   const verificarPassword = async (e) => {
     e.preventDefault();
 
@@ -38,7 +38,7 @@ export default ({ enlace }) => {
       const data = {
         password,
       };
-      const resultado = await clienteAxios.post(`/api/enlaces/${enlace.archivo}`, data);
+      const resultado = await clienteAxios.post(`/api/enlaces/${enlace.enlace}`, data);
       setTienePassword(resultado.data.password)
     } catch (error) {
       mostrarAlerta(error.response.data.msg)
