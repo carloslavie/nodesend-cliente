@@ -8,6 +8,7 @@ import Alerta from "../../components/Alerta";
 
 export async function getServerSideProps({ params }) {
   const { enlace } = params;
+  console.log(enlace)
   const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
   return {
     props: {
