@@ -8,7 +8,7 @@ import Alerta from "../../components/Alerta";
 
 export async function getServerSideProps({ params }) {
   const { enlace } = params;
-  console.log(enlace)
+  // console.log(enlace)
   const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
   return {
     props: {
@@ -30,6 +30,7 @@ export default ({ enlace }) => {
   const { mostrarAlerta, mensaje_archivo } = useContext(appContext);
   const [tienePassword, setTienePassword] = useState(enlace.password);
   const [password, setPassword] = useState("");
+  const [newEnlace, setEnlace] = useState(enlace.archivo)
   console.log(enlace)
   const verificarPassword = async (e) => {
     e.preventDefault();
@@ -40,6 +41,7 @@ export default ({ enlace }) => {
     try {      
       const resultado = await clienteAxios.post(`/api/enlaces/${enlace.enlace}`, data);
       setTienePassword(resultado.data.password)
+      setEnlace(resultado.data.enlace)
     } catch (error) {
       mostrarAlerta(error.response.data.msg)
     }
@@ -91,7 +93,7 @@ export default ({ enlace }) => {
           </h1>
           <div className="flex items-center justify-center mt-10">
             <a
-              href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
+              href={`${process.env.backendURL}/api/archivos/${newEnlace}`}
               className="bg-red-500 text-center px-10 py-3 rounded uppercase font-bold text-white cursor-pointer"
             >
               Aquí
